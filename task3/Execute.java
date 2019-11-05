@@ -13,7 +13,7 @@ public class Execute {
 	public static void main(String[] args) {
 
 		WordPair wordPair = new WordPair();
-		String fileName = "C:/Users/arvin/OneDrive/Documents/loshiga/input_s3.txt";
+		
 		File file = new File(args[0]);
 		FileReader fr = null;
 
