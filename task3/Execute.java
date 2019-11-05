@@ -14,7 +14,7 @@ public class Execute {
 
 		WordPair wordPair = new WordPair();
 		String fileName = "C:/Users/arvin/OneDrive/Documents/loshiga/input_s3.txt";
-		File file = new File(fileName);
+		File file = new File(args[0]);
 		FileReader fr = null;
 
 		try {
@@ -34,7 +34,7 @@ public class Execute {
 				}
 
 			}
-			wordPair.printIfIdf();
+			wordPair.printIfIdf(args[1]);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

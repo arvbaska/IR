@@ -1,8 +1,13 @@
 package task3;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Map.Entry;
 
 public class WordPair {
 	ArrayList<String> words;
@@ -18,19 +23,34 @@ public class WordPair {
 		documents.add(document);
 	}
 
-	public void printIfIdf() {
-		System.out.print("\t");
-		for (String doc : new HashSet<>(documents)) {
-			System.out.print(doc + "\t");
-		}
-		System.out.println();
-		for (String word : new HashSet<>(words)) {
-			System.out.print(word + "\t");
+	public void printIfIdf(String fileName) {
+		
+		BufferedWriter writer;
+		try {
+			writer = new BufferedWriter(new FileWriter(fileName));
+			writer.write("\t");
 			for (String doc : new HashSet<>(documents)) {
-				System.out.print(getWeightMatrix(word, doc) + "\t");
+				writer.write(doc + "\t");
 			}
-			System.out.println();
+			writer.write("\n");
+			for (String word : new HashSet<>(words)) {
+				writer.write(word + "\t");
+				for (String doc : new HashSet<>(documents)) {
+					writer.write(getWeightMatrix(word, doc) + "\t");
+				}
+				writer.write("\n");
+			}
+
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
+		
+		
+		
+		
+		
 	}
 
 	public double getWeightMatrix(String word, String document) {
@@ -89,6 +109,26 @@ public class WordPair {
 		}
 
 		return count;
+	}
+	
+	private void writeFile(HashMap<String, ArrayList<String>> map) {
+		String fileName = "C:/Users/arvin/OneDrive/Documents/loshiga/output.txt";
+		BufferedWriter writer;
+		try {
+			writer = new BufferedWriter(new FileWriter(fileName));
+			for (Entry<String, ArrayList<String>> entry : map.entrySet()) {
+				writer.write(entry.getKey() + "\t");
+				for(String title : entry.getValue()) {
+					writer.write(title + "\t");
+				}
+				writer.write("\n");
+			}
+
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
